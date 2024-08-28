@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import Dashboard from "../components/Dashboard";
 import MOCK_DATA from "../mock";
 import PokemonList from "../components/PokemonList";
+
+export const PokemonContext = createContext();
 
 function Dex() {
   const [selectedPokemon, setSelectedPokemon] = useState([]);
@@ -23,17 +25,20 @@ function Dex() {
   };
 
   return (
-    <div>
-      <Dashboard
-        selectedPokemon={selectedPokemon}
-        onRemovePokemon={removePokemon}
-      />
-      <PokemonList
-        pokemonList={MOCK_DATA}
-        onAddPokemon={addPokemon}
-        selectedPokemon={selectedPokemon}
-      />
-    </div>
+    <PokemonContext.Provider
+      value={{
+        selectedPokemon,
+        removePokemon,
+        MOCK_DATA,
+        addPokemon,
+        selectedPokemon,
+      }}
+    >
+      <div>
+        <Dashboard />
+        <PokemonList />
+      </div>
+    </PokemonContext.Provider>
   );
 }
 

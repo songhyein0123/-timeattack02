@@ -14,7 +14,8 @@ function PokemonCard({ pokemon, onAdd, onRemove, isSelected }) {
       <p>{pokemon.korean_name}</p>
       {isSelected ? (
         <Button
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             onRemove(pokemon);
           }}
         >
@@ -22,7 +23,8 @@ function PokemonCard({ pokemon, onAdd, onRemove, isSelected }) {
         </Button>
       ) : (
         <Button
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             onAdd(pokemon);
           }}
         >
